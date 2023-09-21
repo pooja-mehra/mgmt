@@ -1,22 +1,33 @@
 package com.example.mgmt;
-import mgmt.recommender.RecommenderImplementation;
+import com.example.mgmt.model.Item;
+import com.example.mgmt.repository.ItemRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.util.Arrays;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
-@SpringBootApplication
-@ComponentScan(basePackages = {"mgmt"})
-public class MgmtApplication {
-
+@SpringBootApplication(scanBasePackages = {"com.example.mgmt.*"})
+@EntityScan(basePackages = {"com.example.mgmt.model"})
+public class MgmtApplication implements ApplicationListener<ContextRefreshedEvent> {
+    private final ItemRepository repository;
+    public MgmtApplication(ItemRepository repository){
+        this.repository = repository;
+    }
     public static void main(String[] args) {
         //ApplicationContext manages the beans and dependencies
-        ApplicationContext appContext = SpringApplication.run(MgmtApplication.class, args);
-        //use ApplicationContext to find which filter is being used
-        RecommenderImplementation recommender = appContext.getBean(RecommenderImplementation.class);
-        String name = "pen case";
-        String[] result = recommender.recommended(name);
-        System.out.println(Arrays.toString(result));
+        ApplicationContext appContext =
+        SpringApplication.run(MgmtApplication.class, args);
     }
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        Item item = new Item();
+        item.setName("pen");
+        item.setId(1);
+        item.setCategory("school");
+        item.setPrice(5.00);
+        repository.save(item);
+    }
+
 }

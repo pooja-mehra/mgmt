@@ -1,6 +1,5 @@
-package mgmt.recommender;
+package com.example.mgmt.recommender;
 import org.springframework.stereotype.Component;
-import org.springframework.context.annotation.Primary;
 
 @Component//("PBF")
 //@Primary

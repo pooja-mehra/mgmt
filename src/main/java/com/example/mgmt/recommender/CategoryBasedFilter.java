@@ -1,9 +1,7 @@
-package mgmt.recommender;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.example.mgmt.recommender;
+import com.example.mgmt.model.Item;
 import org.springframework.stereotype.Component;
 import java.lang.String;
-import java.util.Arrays;
-import java.util.HashMap;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
@@ -15,7 +13,7 @@ public class CategoryBasedFilter implements Filter {
         super();
         logger.info("In CategoryBasedFilter constructor method");
     }
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //@Autowired
     private Item item;
