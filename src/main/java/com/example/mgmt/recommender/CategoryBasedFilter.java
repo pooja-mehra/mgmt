@@ -33,6 +33,6 @@ public class CategoryBasedFilter implements Filter {
         logger.info("In ContentBasedFilter preDestroy method");
     }
     public String[] getRecommendations(Object item){
-        return new String[] {"book", "pen", "notebook"};
+        return new String[] {"book", "pen case", "notebook"};
     }
 }

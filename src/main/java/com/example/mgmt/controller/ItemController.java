@@ -1,10 +1,9 @@
 package com.example.mgmt.controller;
 import com.example.mgmt.model.Item;
 import com.example.mgmt.repository.ItemRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("Item")
@@ -14,18 +13,24 @@ public class ItemController {
         this.repository = repository;
     }
 
-    @GetMapping
-    public Iterable<Item> getStudents() {
+    @GetMapping("/")
+    public Iterable<Item> getItems() {
         return repository.findAll();
     }
-    @PostMapping("/create")
-    public Item createItem() {
-        // ...
-        Item item = new Item(2, "printer", "office supplies",160.40);
-        item.setId(1);
-        item.setName("pen");
-        item.setCategory("school supplies");
-        item.setPrice(8.00);
-        return item;
+    @GetMapping("{category}")
+    public List<Item> getItemsByCategory(@PathVariable String category) {
+        return repository.findByCategory(category);//.orElseThrow(StudentNotFoundException::new);
+    }
+    @GetMapping("{id}")
+    public List<Item> getItemsById(@PathVariable int id) {
+        return repository.findById(id);//.orElseThrow(StudentNotFoundException::new);
+    }
+    @GetMapping({"price"})
+    public List<Item> getItemsByPrice(@PathVariable double price) {
+        return repository.findByPriceGreaterThan(price);//.orElseThrow(StudentNotFoundException::new);
+    }
+    @GetMapping("{name}")
+    public List<Item> getItemsByName(@PathVariable String name) {
+        return repository.findByNameContainingIgnoreCase(name);//.orElseThrow(StudentNotFoundException::new);
     }
 }

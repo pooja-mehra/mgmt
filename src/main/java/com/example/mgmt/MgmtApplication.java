@@ -22,12 +22,12 @@ public class MgmtApplication implements ApplicationListener<ContextRefreshedEven
     }
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        Item item = new Item();
+        /*Item item = new Item();
         item.setName("pen");
         item.setId(1);
-        item.setCategory("school");
-        item.setPrice(5.00);
-        repository.save(item);
+        item.setCategory("school supplies");
+        item.setPrice(10.00);
+        repository.save(item);*/
     }
 
 }
