@@ -4,7 +4,6 @@ import com.example.mgmt.repository.ItemRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("Item")
 public class ItemController {
@@ -30,7 +29,7 @@ public class ItemController {
         return repository.findByPriceGreaterThan(price);//.orElseThrow(StudentNotFoundException::new);
     }
     @GetMapping("{name}")
-    public List<Item> getItemsByName(@PathVariable String name) {
-        return repository.findByNameContainingIgnoreCase(name);//.orElseThrow(StudentNotFoundException::new);
+    public List<Item> findItemsByName(@PathVariable String name) {
+        return repository.findItemsByNameContainingIgnoreCase(name);//.orElseThrow(StudentNotFoundException::new);
     }
 }
